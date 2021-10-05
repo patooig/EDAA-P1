@@ -20,7 +20,7 @@ struct Nodo{
         child = NULL;
         sibling = NULL;
     }
-}
+};
 
 class binomialHeap{
 

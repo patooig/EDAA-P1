@@ -9,7 +9,7 @@ binomialHeap::binomialHeap(){
 
 }
 
-binomialHeap::insert(int x){
+void binomialHeap::insert(int x){
 
 
 }
