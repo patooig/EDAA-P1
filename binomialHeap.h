@@ -35,4 +35,4 @@ public:
     void insert(int x);
     int getMin();
 
-}
+};
