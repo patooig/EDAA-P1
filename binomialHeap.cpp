@@ -31,10 +31,17 @@ void binomialHeap::insert(int x){
 
     binomialTree * bt1 = new binomialTree();
     bt1->root = n_node; //o &n_node; ???
+
+    o iterar a partir del heap y buscar sus hermanos para ver 
+    el grado de cada uno 
+
+    luego
+    n_node->sibling = head;
+    head = n_node;
     
     //Luego comparar con los otros binomialTree, accediendo a la raiz
     //de cada uno 
-    
+
     // Debemos tener un conteo de cuantos binomialTree poseemos, y al momento del merge 
        se decrementa en 1.
 }
