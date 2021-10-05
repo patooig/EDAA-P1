@@ -7,6 +7,7 @@ using namespace std;
 int main(){
     
     minHeap * mh = new minHeap(3);
+    //HOLA LEO
     mh->insert(10);
     mh->insert(5);
     mh->insert(102);
