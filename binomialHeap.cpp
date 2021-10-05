@@ -14,7 +14,7 @@ binomialHeap::insert(int x){
 
 }
 
-binomialHeap::getMin(){
+int binomialHeap::getMin(){
 
     Nodo *y = NULL;
     Nodo *x = head;
@@ -29,4 +29,8 @@ binomialHeap::getMin(){
         }
 
         x = x->sibling;
-}
+    
+    } 
+    return min;
+
+}  
