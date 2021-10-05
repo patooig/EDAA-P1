@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "binomialHeap.cpp"
+#include "binomialHeap.h"
 
 using namespace std;
 
