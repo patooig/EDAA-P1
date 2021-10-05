@@ -7,7 +7,6 @@ using namespace std;
 
 struct Nodo{
 
-    int key;	//¿Es necesario la clave-valor?
     int valor;
 
     int degree;
