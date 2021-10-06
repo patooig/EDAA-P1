@@ -49,7 +49,6 @@ void binomialHeap::insert(int x){
 
 int binomialHeap::getMin(){
 
-    Nodo *y = NULL;
     Nodo *x = head;
     int min = INT_MAX;
 
