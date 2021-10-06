@@ -15,7 +15,7 @@ struct Nodo{
     Nodo *sibling;
 
     Nodo(){
-
+        degree = 0;
         parent = nullptr;
         child = nullptr;
         sibling = nullptr;
@@ -35,5 +35,6 @@ public:
     void insert(int x);
     int getMin();
     void link(Nodo *x, Nodo*y);
+    void unionBinomial(binomialHeap bh);
 
 };
