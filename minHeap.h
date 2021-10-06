@@ -21,6 +21,7 @@ class minHeap{
     void unirMinHeap(minHeap *mh);
     vector<int> *getVec();
     void insert(int x);
+    void reordenar(int i);
     void removeMin();
     int getMin();
     int size();

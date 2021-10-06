@@ -99,6 +99,7 @@ void minHeap::unirMinHeap(minHeap * mh){
     vector<int> * hp_mh;
 
     int sz = size() + mh->size();
+    cout << "si"<<sz<<endl;
 
     minHeap * nuevo_mh = new minHeap(sz);
     
@@ -113,9 +114,27 @@ void minHeap::unirMinHeap(minHeap * mh){
         hp_nuevo->at(i+size()) = hp_mh->at(i);
     }
 
-    nuevo_mh->setSize(sz);              // El nuevo heap tiene size
+    nuevo_mh->setSize(sz);             // El nuevo heap tiene size
+    realSize = sz;
+
     heap = hp_nuevo;                    // queremos que hp_nuevo sea nuestro this
     
+}
+
+void minHeap::reordenar(int i)
+{
+    int l = 2*i;//left(i);
+    int r = 2*i+1;//right(i);
+    int smallest = i;
+    if (l < size() && heap->at(l) < heap->at(i))
+        smallest = l;
+    if (r < size() && heap->at(r) < heap->at(smallest))
+        smallest = r;
+    if (smallest != i)
+    {
+        swap(heap->at(i), heap->at(smallest));
+        reordenar(smallest);
+    }
 }
 
 void minHeap::swap(int pos1, int pos2){
@@ -126,7 +145,7 @@ void minHeap::swap(int pos1, int pos2){
 
 void minHeap::imprimir(){
 
-    for (int i = 1; i <= realSize; i++)
+    for (int i = 1; i <= size(); i++)
     {
         cout << heap->at(i) << " ";
     }
