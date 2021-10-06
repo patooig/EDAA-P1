@@ -87,6 +87,15 @@ int minHeap::size(){
     return realSize;
 }
 
+void minHeap::unirMinHeap(minHeap * mh){
+    vector<int> min_h = mh->getVec();
+    int sz = mh->size();
+    for (int i = 1; i <= sz; i++){
+        insert(min_h[i]);
+    }
+    delete mh;
+}
+
 void minHeap::swap(int pos1, int pos2){
     int aux = heap[pos2];
     heap[pos2] = heap[pos1];
@@ -100,6 +109,10 @@ void minHeap::imprimir(){
         cout << heap[i] << " ";
     }
     cout<<endl;
+}
+
+vector<int> minHeap::getVec(){
+    return heap;
 }
 
 
