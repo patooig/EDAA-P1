@@ -5,7 +5,7 @@ using namespace std;
 class minHeap{
 
     private:
-    vector<int> heap;
+    vector<int>* heap;
     void upHeap(int pos);
     int realSize,MaxSize;
     void swap(int a,int b);
@@ -15,7 +15,7 @@ class minHeap{
     minHeap(int n);
     ~minHeap();
     void unirMinHeap(minHeap *mh);
-    vector<int> getVec();
+    vector<int> *getVec();
     void insert(int x);
     void removeMin();
     int getMin();

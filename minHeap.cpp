@@ -6,10 +6,11 @@
 using namespace std;
 
 minHeap::minHeap(int n){
+    heap = new vector<int>;
     realSize = 0;
     MaxSize = n;
-    heap.assign((n+1),INT32_MAX);
-    heap[0] = INT32_MIN;
+    heap->assign((n+1),INT32_MAX);
+    heap->at(0) = INT32_MIN;
 }
 
 minHeap::~minHeap(){
@@ -20,13 +21,13 @@ void minHeap::insert(int x){
     if(realSize<MaxSize){ 
                        
         realSize++;    // Insertamos en el ultimo lugar disp.
-        heap[realSize] = x;
+        heap->at(realSize) = x;
         upHeap(realSize);
     } 
 }
 
 void minHeap::removeMin(){
-    heap[1] = heap[realSize];
+    heap->at(1) = heap->at(realSize);
     realSize--;
     downHeap();
 }
@@ -48,17 +49,17 @@ void minHeap::downHeap(){
             h2 = false;
         } 
         if(h1&&h2){ // Si existen ambos hijos
-            if(heap[hijo1]<heap[hijo2])hijomenor=hijo1;
+            if(heap->at(hijo1)<heap->at(hijo2))hijomenor=hijo1;
             else hijomenor=hijo2;
-            if(heap[padre]>heap[hijomenor])swap(padre,hijomenor);
+            if(heap->at(padre)>heap->at(hijomenor))swap(padre,hijomenor);
             padre = hijomenor;
         }
         else if(h1 && ~h2){  // Si existe el hijo izq 
-            if(heap[padre]>heap[hijo1])swap(padre,hijo1);
+            if(heap->at(padre)>heap->at(hijo1))swap(padre,hijo1);
             padre = hijo1;
         }
         else if(~h1 && h2){  // Si existe el hijo derecho 
-            if(heap[padre]>heap[hijo2])swap(padre,hijo2);
+            if(heap->at(padre)>heap->at(hijo2))swap(padre,hijo2);
             padre = hijo2;
         }
     }
@@ -68,7 +69,7 @@ void minHeap::downHeap(){
 void minHeap::upHeap(int pos){
     int padre = pos/2;
     while(padre>=1){
-        if(heap[padre]>heap[pos]){
+        if(heap->at(padre)>heap->at(pos)){
             swap(padre,pos);
             pos = padre;
             padre = padre/2;
@@ -79,7 +80,7 @@ void minHeap::upHeap(int pos){
 }
 
 int minHeap::getMin(){
-    if(realSize>0)return heap[1];  // Si existe elemento, debe ser el que esta en el root
+    if(realSize>0)return heap->at(1);  // Si existe elemento, debe ser el que esta en el root
     else return -1;
 }
 
@@ -88,30 +89,32 @@ int minHeap::size(){
 }
 
 void minHeap::unirMinHeap(minHeap * mh){
-    vector<int> min_h = mh->getVec();
-    int sz = mh->size();
-    for (int i = 1; i <= sz; i++){
-        insert(min_h[i]);
+    vector<int> hp;
+    int sz = size() + mh->size();
+    minHeap * nuevo_mh = new minHeap(sz);
+    for (int i = 1; i <= size() ; i++)
+    {
+        
     }
-    delete mh;
+    
 }
 
 void minHeap::swap(int pos1, int pos2){
-    int aux = heap[pos2];
-    heap[pos2] = heap[pos1];
-    heap[pos1] = aux;
+    int aux = heap->at(pos2);
+    heap->at(pos2) = heap->at(pos1);
+    heap->at(pos1) = aux;
 }
 
 void minHeap::imprimir(){
 
     for (int i = 1; i <= realSize; i++)
     {
-        cout << heap[i] << " ";
+        cout << heap->at(i) << " ";
     }
     cout<<endl;
 }
 
-vector<int> minHeap::getVec(){
+vector<int> * minHeap::getVec(){
     return heap;
 }
 
