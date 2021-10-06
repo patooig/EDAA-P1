@@ -36,5 +36,6 @@ public:
     int getMin();
     void link(Nodo *x, Nodo*y);
     void unionBinomial(binomialHeap bh);
+    void imprimir();
 
 };
