@@ -23,9 +23,9 @@ int main(){
     mhh->insert(4);
     mhh->insert(2);
     mhh->imprimir();
-
     mh->unirMinHeap(mhh);
     mh->imprimir();
+    
     return 0;
 }
 

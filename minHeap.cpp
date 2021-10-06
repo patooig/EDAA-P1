@@ -116,34 +116,45 @@ void minHeap::unirMinHeap(minHeap * mh){
 
     nuevo_mh->setSize(sz);             // El nuevo heap tiene size
     realSize = sz;
-
     heap = hp_nuevo;                    // queremos que hp_nuevo sea nuestro this
+    imprimir();
+    for (int i = (sz/2); i>=1; i--)
+    {
+        reordenar(i);
+    }
+    
     
 }
 
-void minHeap::reordenar(int i){
+void minHeap::reordenar(int padre){
+    bool h1 = true, h2 = true;
+    int hijo1 = 2*padre;
+    int hijo2 = 2*padre+1;
+    int menor = padre;
 
-    int hijo1 = 2*i;
-    int hijo2 = 2*i+1;
-    int menor = i;
-
-    hijo1 = i*2;   // Verificar si existen
-        hijo2 = padre*2+1; // Verificar si existen
-        if(hijo1 > realSize){
-            h1 = false;
-        } 
-        if(hijo2 > realSize){
-            h2 = false;
-        } 
+    if(padre == realSize) return;
+    if(hijo1 > realSize){       //Verificamos si el hijo izq exist
+        h1 = false;
+    } 
+    if(hijo2 > realSize){      //Verificamos si el hijo derecho exist
+        h2 = false;
+    } 
+    if(!h1 && !h2)return;    // Si no existe ninguno, termina
     
+    // Si existe el menor y está en el hijo izq
+    if (h1 && heap->at(hijo1) < heap->at(padre)){       
 
-    if (hijo1 <= size() && heap->at(hijo1) < heap->at(i))
         menor = hijo1;
-    if (hijo2 <= size() && heap->at(hijo2) < heap->at(menor))
+    }
+        
+    if (h2 && heap->at(hijo2) < heap->at(menor)){
+
         menor = hijo2;
-    if (menor != i)
-    {
-        swap(heap->at(i), heap->at(menor));
+    }
+        
+    if (menor != padre){
+
+        swap(padre, menor);
         reordenar(menor);
     }
 }
