@@ -9,6 +9,21 @@ binomialHeap::binomialHeap(){
 
 }
 
+void binomialHeap::imprimir(){
+    Nodo * raiz = head ;
+    Nodo * child = raiz->child;
+
+    if(raiz!=nullptr) cout << raiz->valor << endl;
+    //Imprimir los hijos del head
+    while (child!=nullptr)
+    {
+        cout << child->valor << " " ;
+        child = child->sibling;
+    }
+    raiz = raiz->sibling;
+    
+}
+
 binomialHeap::~binomialHeap(){
     
 }
@@ -23,7 +38,8 @@ void binomialHeap::insert(int x){
     Nodo * n_node = new Nodo();
     n_node->valor = x;
     bh.head = n_node;
-    unionBinomial(bh);
+    if(head!=nullptr) unionBinomial(bh);
+    else head = n_node;
     // crear binomial tree
 
 }
