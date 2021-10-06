@@ -58,7 +58,6 @@ int binomialHeap::getMin(){
         if(x->valor < min){
 
             min = x->valor;
-            y = x;
         }
 
         x = x->sibling;
