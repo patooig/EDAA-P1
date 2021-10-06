@@ -15,6 +15,8 @@ binomialHeap::binomialHeap(){
 
   Dos binomial trees no pueden tener el mismo grado */
 void binomialHeap::insert(int x){
+
+
     // crear binomial tree
 
 }
@@ -81,16 +83,148 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 }
 
 void binomialHeap::union(binomialHeap h2){
+/*
+	1 H ← M AKE -B INOMIAL -H EAP ()
+2 head[H ] ← B INOMIAL -HEAP -M ERGE (H1 , H2 )
+3 free the objects H 1 and H 2 but not the lists they point to
+4 if head[H ] = NIL
+5
+ then return H
+6 prev-x ← NIL
+7 x ← head[H ]
+8 next-x ← sibling[x]
+9 while next-x = NIL
+10
+ do if (degree[x] = degree[next-x]) or
+(sibling[next-x] = NIL and degree[sibling[next-x]] = degree[x])
+11
+ then prev-x ← x
+ ✄ Cases 1 and 2
+12
+ x ← next-x
+ ✄ Cases 1 and 2
+13
+ else if key[x] ≤ key[next-x]
+14
+ then sibling[x] ← sibling[next-x]
+ ✄ Case 3
+15
+ B INOMIAL -L INK (next-x, x)
+ ✄ Case 3
+16
+ else if prev-x = NIL
+ ✄ Case 4
+17
+ then head[H ] ← next-x
+ ✄ Case 4
+18
+ else sibling[prev-x] ← next-x
+ ✄ Case 4
+19
+ B INOMIAL -L INK (x, next-x)
+ ✄ Case 4
+20
+ x ← next-x
+ ✄ Case 4
+21
+ next-x ← sibling[x]
+22 return H
+*/
 
 	Nodo* nodoH1 = head;
 	Nodo* nodoH2 = h2->head;
 	Nodo* aux = nullptr;
+	Nodo* temp = nullptr;
 
 	if(nodoH1->degree <= nodoH2->degree){
 
 		aux = nodoH1;
-		nodoH1 = aux->sibling;
-
+		nodoH1 = nodoH1->sibling;
 	}
 
+	else{
+
+		aux = nodoH2;
+		nodoH2 = nodoH2->sibling;
+	}
+
+	temp = aux;
+
+	while(nodoH1 != nullptr && nodoH2 != nullptr){
+
+		if(nodoH1->degree <= nodoH2->degree){
+
+			aux->sibling = nodoH1;
+			nodoH1 = nodoH1->sibling;
+		}
+
+		else{
+			aux->sibling = nodoH2;
+			nodoH2 = nodoH2 -> sibling;
+		}
+
+		aux = aux->sibling;
+	}
+
+	if(nodoH1 != nullptr){
+
+		while(nodoH1 != nullptr){
+
+			aux->sibling = nodoH1;
+			nodoH1 = nodoH1->sibling;
+			aux = aux->sibling;
+		}
+	}
+
+	if(nodoH2 != nullptr){
+
+		while(nodoH2 != nullptr){
+
+			aux->sibling = nodoH2;
+			nodoH2 = nodoH2->sibling;
+			aux = aux->sibling;
+		}
+	}
+
+	aux = temp;
+	Nodo* prev = nullptr;
+	Nodo* next = aux->sibling;
+
+	while(next != nullptr){
+
+		if(aux->degree != next->degree || (next->sibling != nullptr && next->sibling->degree == aux->degree)){
+
+			prev = aux;
+			aux = next;
+		}
+
+		else {
+
+			if(aux->valor <= next->valor){
+
+				aux->sibling = next->sibling;
+				link(next, aux);
+			}
+
+			else {
+
+				if(prev == nullptr){
+
+					head = next;
+			}
+
+				else{
+
+					prev->sibling = next;
+				}
+
+				link(aux, next);
+				aux = next;
+			}
+		}
+
+		next = aux->sibling;
+	}
+
+	head = temp;
 }
