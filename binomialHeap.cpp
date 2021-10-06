@@ -15,8 +15,11 @@ binomialHeap::binomialHeap(){
 
   Dos binomial trees no pueden tener el mismo grado */
 void binomialHeap::insert(int x){
-
-
+    binomialHeap bh ;
+    Nodo * n_node = new Nodo();
+    n_node->valor = x;
+    bh.head = n_node;
+    unionBinomial(bh);
     // crear binomial tree
 
 }
@@ -82,7 +85,7 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 	y->degree = y->degree + 1 // y->degree++;
 }
 
-void binomialHeap::union(binomialHeap h2){
+void binomialHeap::unionBinomial(binomialHeap bh){
 /*
 	1 H ← M AKE -B INOMIAL -H EAP ()
 2 head[H ] ← B INOMIAL -HEAP -M ERGE (H1 , H2 )
@@ -132,7 +135,7 @@ void binomialHeap::union(binomialHeap h2){
 */
 
 	Nodo* nodoH1 = head;
-	Nodo* nodoH2 = h2->head;
+	Nodo* nodoH2 = bh->head;
 	Nodo* aux = nullptr;
 	Nodo* temp = nullptr;
 
