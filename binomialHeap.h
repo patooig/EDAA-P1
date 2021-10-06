@@ -16,9 +16,9 @@ struct Nodo{
 
     Nodo(){
 
-        parent = NULL;
-        child = NULL;
-        sibling = NULL;
+        parent = nullptr;
+        child = nullptr;
+        sibling = nullptr;
     }
 };
 
