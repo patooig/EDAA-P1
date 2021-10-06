@@ -121,19 +121,30 @@ void minHeap::unirMinHeap(minHeap * mh){
     
 }
 
-void minHeap::reordenar(int i)
-{
-    int l = 2*i;//left(i);
-    int r = 2*i+1;//right(i);
-    int smallest = i;
-    if (l < size() && heap->at(l) < heap->at(i))
-        smallest = l;
-    if (r < size() && heap->at(r) < heap->at(smallest))
-        smallest = r;
-    if (smallest != i)
+void minHeap::reordenar(int i){
+
+    int hijo1 = 2*i;
+    int hijo2 = 2*i+1;
+    int menor = i;
+
+    hijo1 = i*2;   // Verificar si existen
+        hijo2 = padre*2+1; // Verificar si existen
+        if(hijo1 > realSize){
+            h1 = false;
+        } 
+        if(hijo2 > realSize){
+            h2 = false;
+        } 
+    
+
+    if (hijo1 <= size() && heap->at(hijo1) < heap->at(i))
+        menor = hijo1;
+    if (hijo2 <= size() && heap->at(hijo2) < heap->at(menor))
+        menor = hijo2;
+    if (menor != i)
     {
-        swap(heap->at(i), heap->at(smallest));
-        reordenar(smallest);
+        swap(heap->at(i), heap->at(menor));
+        reordenar(menor);
     }
 }
 
