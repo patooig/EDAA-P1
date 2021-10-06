@@ -79,3 +79,18 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 	y->child = x;
 	y->degree = y->degree + 1 // y->degree++;
 }
+
+void binomialHeap::union(binomialHeap h2){
+
+	Nodo* nodoH1 = head;
+	Nodo* nodoH2 = h2->head;
+	Nodo* aux = nullptr;
+
+	if(nodoH1->degree <= nodoH2->degree){
+
+		aux = nodoH1;
+		nodoH1 = aux->sibling;
+
+	}
+
+}
