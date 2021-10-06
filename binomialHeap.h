@@ -34,5 +34,6 @@ public:
     ~binomialHeap();
     void insert(int x);
     int getMin();
+    void link(Nodo *x, Nodo*y);
 
 };
