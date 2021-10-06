@@ -82,7 +82,7 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 	x->parent = y;
 	x->sibling = y->child;
 	y->child = x;
-	y->degree = y->degree + 1 // y->degree++;
+	y->degree = y->degree + 1; // y->degree++;
 }
 
 void binomialHeap::unionBinomial(binomialHeap bh){
@@ -135,7 +135,7 @@ void binomialHeap::unionBinomial(binomialHeap bh){
 */
 
 	Nodo* nodoH1 = head;
-	Nodo* nodoH2 = bh->head;
+	Nodo* nodoH2 = bh.head;
 	Nodo* aux = nullptr;
 	Nodo* temp = nullptr;
 
