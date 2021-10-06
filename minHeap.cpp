@@ -8,7 +8,7 @@ using namespace std;
 minHeap::minHeap(int n){
     realSize = 0;
     MaxSize = n;
-    heap.assign((n+1),INT32_MAX); // Con que numero lo relleno? es importante?
+    heap.assign((n+1),INT32_MAX);
     heap[0] = INT32_MIN;
 }
 
@@ -17,11 +17,10 @@ minHeap::~minHeap(){
 }
 
 void minHeap::insert(int x){
-    if(realSize<MaxSize){ // Existe espacio disp ??
-     // Insertamos en el ultimo lugar disp.
-        realSize++;
+    if(realSize<MaxSize){ 
+                       
+        realSize++;    // Insertamos en el ultimo lugar disp.
         heap[realSize] = x;
-        //heap.push_back(x);
         upHeap(realSize);
     } 
 }
@@ -54,11 +53,11 @@ void minHeap::downHeap(){
             if(heap[padre]>heap[hijomenor])swap(padre,hijomenor);
             padre = hijomenor;
         }
-        else if(h1 && ~h2){  // Si existe el hijo izq nomas
+        else if(h1 && ~h2){  // Si existe el hijo izq 
             if(heap[padre]>heap[hijo1])swap(padre,hijo1);
             padre = hijo1;
         }
-        else if(~h1 && h2){  // Si existe el hijo derecho nomas
+        else if(~h1 && h2){  // Si existe el hijo derecho 
             if(heap[padre]>heap[hijo2])swap(padre,hijo2);
             padre = hijo2;
         }
