@@ -65,3 +65,17 @@ int binomialHeap::getMin(){
     return min;
 
 }  
+
+//y->valor <= x->valor
+void binomialHeap::link(Nodo *x, Nodo *y){
+/*
+	1 p[y] ← z
+	2 sibling[y] ← child[z]
+	3 child[z] ← y
+	4 degree[z] ← degree[z] + 1*/
+
+	x->parent = y;
+	x->sibling = y->child;
+	y->child = x;
+	y->degree = y->degree + 1 // y->degree++;
+}
