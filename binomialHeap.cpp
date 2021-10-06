@@ -9,6 +9,10 @@ binomialHeap::binomialHeap(){
 
 }
 
+binomialHeap::~binomialHeap(){
+    
+}
+
 /*Al momento de insertar debemos crear UN BINOMIAL TREE
   con el único nodo, asignar grado y comparar el grado
   de la raiz de los binomial trees.
@@ -57,7 +61,7 @@ int binomialHeap::getMin(){
     Nodo *x = head;
     int min = INT_MAX;
 
-    while(x != NULL){
+    while(x != nullptr){
 
         if(x->valor < min){
 
@@ -68,7 +72,6 @@ int binomialHeap::getMin(){
     
     } 
     return min;
-
 }  
 
 //y->valor <= x->valor
