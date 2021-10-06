@@ -5,7 +5,7 @@ using namespace std;
 
 binomialHeap::binomialHeap(){
 
-    head = NULL;
+    head = nullptr;
 
 }
 
