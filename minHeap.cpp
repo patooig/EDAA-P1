@@ -14,64 +14,19 @@ minHeap::minHeap(int n){
 }
 
 minHeap::~minHeap(){
-
+    delete heap;
 }
 
-void minHeap::setSize(int s){
-    realSize = s;
-}
-
-void minHeap::insert(int x){
-    if(realSize<MaxSize){ 
-                       
-        realSize++;    // Insertamos en el ultimo lugar disp.
+void minHeap::insert(int x){       // Insertamos en la ultima posicion y debemos
+    if(realSize<MaxSize){          // subir el nodo si es menor.
+        realSize++;    
         heap->at(realSize) = x;
         upHeap(realSize);
     } 
 }
 
-void minHeap::removeMin(){
-    heap->at(1) = heap->at(realSize);
-    realSize--;
-    downHeap();
-}
-
-void minHeap::downHeap(){
-    int padre = 1;
-    int hijo1;
-    int hijo2;
-    int hijomenor;
-    bool h1 = true, h2 = true;
-    while (padre<realSize)
-    {
-        hijo1 = padre*2;   // Verificar si existen
-        hijo2 = padre*2+1; // Verificar si existen
-        if(hijo1 > realSize){
-            h1 = false;
-        } 
-        if(hijo2 > realSize){
-            h2 = false;
-        } 
-        if(h1&&h2){ // Si existen ambos hijos
-            if(heap->at(hijo1)<heap->at(hijo2))hijomenor=hijo1;
-            else hijomenor=hijo2;
-            if(heap->at(padre)>heap->at(hijomenor))swap(padre,hijomenor);
-            padre = hijomenor;
-        }
-        else if(h1 && ~h2){  // Si existe el hijo izq 
-            if(heap->at(padre)>heap->at(hijo1))swap(padre,hijo1);
-            padre = hijo1;
-        }
-        else if(~h1 && h2){  // Si existe el hijo derecho 
-            if(heap->at(padre)>heap->at(hijo2))swap(padre,hijo2);
-            padre = hijo2;
-        }
-    }
-    
-}
-
-void minHeap::upHeap(int pos){
-    int padre = pos/2;
+void minHeap::upHeap(int pos){     //Hijo verifica su padre, si es menor se intercambia
+    int padre = pos/2;             // así de forma iterativa hasta llegar a la raiz.
     while(padre>=1){
         if(heap->at(padre)>heap->at(pos)){
             swap(padre,pos);
@@ -83,84 +38,82 @@ void minHeap::upHeap(int pos){
     }
 }
 
-int minHeap::getMin(){
-    if(realSize>0)return heap->at(1);  // Si existe elemento, debe ser el que esta en el root
+int minHeap::getMin(){            //Devuelve el mínimo
+    if(realSize>0)return heap->at(1); 
     else return -1;
 }
 
-int minHeap::size(){
+int minHeap::size(){            // Devuekve el número de elementos insertados en el vector
     return realSize;
 }
 
-int minHeap::getrealSize(){
+int minHeap::getrealSize(){     // Devuelve el valor del tamaño real del vector
     return MaxSize;
 }
 
 
 void minHeap::unirMinHeap(minHeap * mh){ 
-    vector<int> * hp_nuevo;
-    vector<int> * hp_mh;
+    vector<int> * hp_nuevo = new vector<int>;       // Creamos nuevo heap
+    int sz = getrealSize() + mh->getrealSize();     // Tamaño del nuevo minHeap
+    hp_nuevo->assign((sz+1),INT32_MAX);             // Rellenamos 
+    hp_nuevo->at(0) = INT32_MIN;
 
-    
-    int sz = getrealSize() + mh->getrealSize();  // Tamaño del nuevo minHeap
-
-    minHeap * nuevo_mh = new minHeap(sz);
-    
-    hp_nuevo = nuevo_mh->getVec();
-    for (int i = 1; i <= size() ; i++){  // Inserto en el nuevo heap el this->vector
+    vector<int> * hp_mh;                            // Vector auxiliar para acceder al mh
+ 
+    for (int i = 1; i <= size() ; i++){             // Inserto los elementos que tengo en el head
         hp_nuevo->at(i) = heap->at(i);
     }
     hp_mh = mh->getVec();
-    for (int i = 1; i <= mh->size(); i++){ // Inserto en el nuevo heap el mh->vector
+    for (int i = 1; i <= mh->size(); i++){          // Inserto los elementos que tengo en mh
     
         hp_nuevo->at(i+size()) = hp_mh->at(i);
     }
 
-    nuevo_mh->setSize(size()+mh->size());             // El nuevo heap tiene size
-    realSize = size()+mh->size();
+    realSize = size()+mh->size();                   // Reasignamos los nuevos valores a la variables
     MaxSize = sz;
-    heap = hp_nuevo;                    // queremos que hp_nuevo sea nuestro this
-    for (int i = (sz/2); i>=1; i--)
-    {
-        reordenar(i);                     // EL heap no cumple con la propiedad de min,
-    }                                      // se debe reordenar los números
+
+    delete mh;
+    delete heap;
+    heap = hp_nuevo;                    
+
+    for (int i = (sz/2); i>=1; i--)                 // El nuevo heap no cumple con la propiedad de min,
+    {                                               // se deben reordenar los elementos
+        reordenar(i);                     
+    }                                      
    
 }
 
-void minHeap::reordenar(int padre){
-    bool h1 = true, h2 = true;
+void minHeap::reordenar(int padre){             //Verifica si los hijos del nodo contienen 
+    bool h1 = true, h2 = true;                  //elementos menores a el
     int hijo1 = 2*padre;
     int hijo2 = 2*padre+1;
     int hijomenor = padre;
 
     if(padre == realSize) return;
-    if(hijo1 > realSize){       //Verificamos si el hijo izq exist
+    if(hijo1 > realSize){                           //Verificamos si el hijo izq exist
         h1 = false;
     } 
-    if(hijo2 > realSize){      //Verificamos si el hijo derecho exist
+    if(hijo2 > realSize){                           //Verificamos si el hijo derecho exist
         h2 = false;
     } 
-    if(!h1 && !h2)return;    // Si no existe ninguno, termina
+    if(!h1 && !h2)return;                           // Si no existe ninguno, termina
     
-    // Si el menor esta en el hijo 1
-    if (h1 && heap->at(hijo1) < heap->at(padre)){       
-
+                                                    
+    if (h1 && heap->at(hijo1) < heap->at(padre)){   // Si el menor esta en el hijo 1
         hijomenor = hijo1;
     }
-    // Si el menor esta en el hijo 2
-    if (h2 && heap->at(hijo2) < heap->at(hijomenor)){
-
+    
+    if (h2 && heap->at(hijo2) < heap->at(hijomenor)){// Si el menor esta en el hijo 2
         hijomenor = hijo2;
     }
-    // Si cambia el valor del menor, debemos hacer el swap
-    // y volver a reordenar para el nodo de abajo.
-    if (padre!=hijomenor){
-        swap(padre, hijomenor);
+    
+    if (padre!=hijomenor){                           // Si cambia el valor del menor, debemos hacer el swap
+        swap(padre, hijomenor);                      // y volver a reordenar para el nodo de abajo de forma recursiva
         reordenar(hijomenor);
     }
 }
 
-void minHeap::swap(int pos1, int pos2){
+void minHeap::swap(int pos1, int pos2){             //Intercambia posiciones
     int aux = heap->at(pos2);
     heap->at(pos2) = heap->at(pos1);
     heap->at(pos1) = aux;
@@ -175,7 +128,7 @@ void minHeap::imprimir(){
     cout<<endl;
 }
 
-vector<int> * minHeap::getVec(){
+vector<int> * minHeap::getVec(){    // Retorna un puntero al vector de los elementos
     return heap;
 }
 

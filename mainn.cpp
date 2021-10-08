@@ -12,7 +12,7 @@ int main(){
     mh->insert(10);
     mh->insert(5);
     mh->insert(102);
-    mh->insert(1);
+    
     mh->imprimir();
     cout << mh->getMin() << endl;
 
@@ -26,7 +26,9 @@ int main(){
     mh->imprimir();
 
     mh->insert(69);
+    mh->insert(1);
     mh->imprimir();
+    delete mh;
 
     /*
     FibonacciHeap * fh = new FibonacciHeap();
