@@ -26,8 +26,3 @@ int main(){
     
     return 0;
 }
-
-//Probando la edición
-
-//Cualquier Cosa
-// Holi
