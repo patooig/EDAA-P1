@@ -2,7 +2,7 @@
 using namespace std;
 
 class FibonacciHeap(){
-
+// WENA PO LARVA
 	FibonacciHeap:: FibonacciHeap(){
 		min=NULL;
 	}
