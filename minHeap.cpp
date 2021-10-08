@@ -92,29 +92,33 @@ int minHeap::size(){
     return realSize;
 }
 
-// Despues de unir no se puede insertar pq el nuevo se llena //
+int minHeap::getrealSize(){
+    return MaxSize;
+}
+
 
 void minHeap::unirMinHeap(minHeap * mh){ 
     vector<int> * hp_nuevo;
     vector<int> * hp_mh;
 
-    int sz = size() + mh->size();  // Tamaño del nuevo minHeap
+    
+    int sz = getrealSize() + mh->getrealSize();  // Tamaño del nuevo minHeap
 
     minHeap * nuevo_mh = new minHeap(sz);
     
     hp_nuevo = nuevo_mh->getVec();
-    for (int i = 1; i <= size() ; i++)  // Inserto en el nuevo heap el this->vector
-    {
+    for (int i = 1; i <= size() ; i++){  // Inserto en el nuevo heap el this->vector
         hp_nuevo->at(i) = heap->at(i);
     }
     hp_mh = mh->getVec();
-    for (int i = 1; i <= mh->size(); i++)  // Inserto en el nuevo heap el mh->vector
-    {
+    for (int i = 1; i <= mh->size(); i++){ // Inserto en el nuevo heap el mh->vector
+    
         hp_nuevo->at(i+size()) = hp_mh->at(i);
     }
 
-    nuevo_mh->setSize(sz);             // El nuevo heap tiene size
-    realSize = sz;
+    nuevo_mh->setSize(size()+mh->size());             // El nuevo heap tiene size
+    realSize = size()+mh->size();
+    MaxSize = sz;
     heap = hp_nuevo;                    // queremos que hp_nuevo sea nuestro this
     for (int i = (sz/2); i>=1; i--)
     {

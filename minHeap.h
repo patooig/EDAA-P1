@@ -13,6 +13,7 @@ class minHeap{
     void upHeap(int pos);
     void downHeap();
     void setSize(int s);
+    int getrealSize();
 
     public: 
     

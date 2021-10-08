@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-    /*
+    
     minHeap * mh = new minHeap(10);
 
     mh->insert(10);
@@ -24,7 +24,11 @@ int main(){
     mhh->imprimir();
     mh->unirMinHeap(mhh);
     mh->imprimir();
-*/
+
+    mh->insert(69);
+    mh->imprimir();
+
+    /*
     FibonacciHeap * fh = new FibonacciHeap();
     fh->insert(10);
     fh->insert(1);
@@ -43,8 +47,10 @@ int main(){
     cout << endl;
     fh->unir(fhh);
     fh->imprimir();
+
+    cout << "Min. despues de unir " << fh->getMin() << endl;
     //fhh->imprimir();
    // delete fh;
-    delete fhh;
+    delete fhh;*/
     return 0;
 }
