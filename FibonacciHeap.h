@@ -17,6 +17,7 @@ class FibonacciHeap{
 
 private:
 	nodo * min;
+	int sz;
 
 public:
 	FibonacciHeap();
@@ -24,5 +25,7 @@ public:
 	void insert(int n);
 	int getMin();
 	void unir(FibonacciHeap *f);
+	void imprimir();
+	int size();
 
 };

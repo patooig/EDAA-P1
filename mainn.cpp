@@ -1,11 +1,12 @@
 #include <vector>
 #include <iostream>
 #include "minHeap.h"
+#include "FibonacciHeap.h"
 
 using namespace std;
 
 int main(){
-    
+    /*
     minHeap * mh = new minHeap(10);
 
     mh->insert(10);
@@ -23,6 +24,27 @@ int main(){
     mhh->imprimir();
     mh->unirMinHeap(mhh);
     mh->imprimir();
-    
+*/
+    FibonacciHeap * fh = new FibonacciHeap();
+    fh->insert(10);
+    fh->insert(1);
+    fh->insert(102);
+    fh->insert(100);
+   // fh->insert(5);
+    cout <<" fibo min:" <<fh->getMin()<<endl;
+    fh->imprimir();
+    cout << endl;
+
+    FibonacciHeap * fhh = new FibonacciHeap();
+    fhh->insert(16);
+    fhh->insert(12);
+    fhh->insert(11);
+    fhh->imprimir();
+    cout << endl;
+    fh->unir(fhh);
+    fh->imprimir();
+    //fhh->imprimir();
+   // delete fh;
+    delete fhh;
     return 0;
 }
