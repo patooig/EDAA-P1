@@ -7,7 +7,7 @@ using namespace std;
 minHeap::minHeap(int n){
     heap = new vector<int>;
     realSize = 0;
-    MaxSize = n;
+    maxSize = n;
     heap->assign((n+1),INT32_MAX);
     heap->at(0) = INT32_MIN;
 }
@@ -17,7 +17,7 @@ minHeap::~minHeap(){
 }
 
 void minHeap::insert(int x){       // Insertamos en la ultima posicion y debemos
-    if(realSize<MaxSize){          // subir el nodo si es menor.
+    if(realSize<maxSize){          // subir el nodo si es menor.
         realSize++;    
         heap->at(realSize) = x;
         upHeap(realSize);
@@ -47,7 +47,7 @@ int minHeap::size(){            // Devuekve el número de elementos insertados e
 }
 
 int minHeap::getrealSize(){     // Devuelve el valor del tamaño real del vector
-    return MaxSize;
+    return maxSize;
 }
 
 
@@ -69,7 +69,7 @@ void minHeap::unirMinHeap(minHeap * mh){
     }
 
     realSize = size()+mh->size();                   // Reasignamos los nuevos valores a la variables
-    MaxSize = sz;
+    maxSize = sz;
 
     delete mh;
     delete heap;

@@ -7,7 +7,7 @@ class minHeap{
     private:
 
     vector<int>* heap;
-    int realSize,MaxSize;
+    int realSize,maxSize;
     void swap(int a,int b);
     void upHeap(int pos);
     int getrealSize();
