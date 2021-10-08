@@ -1,4 +1,3 @@
-//MIN HEAP
 #include <vector>
 #include <iostream>
 #include "minHeap.h"
