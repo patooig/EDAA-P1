@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class FibonacciHeap(){
 
 	FibonacciHeap:: FibonacciHeap(){
 		min=NULL;
@@ -31,5 +30,3 @@ class FibonacciHeap(){
 		return min->valor;
 
 	}
-
-}
