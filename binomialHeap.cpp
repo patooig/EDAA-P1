@@ -72,6 +72,8 @@ void binomialHeap::insert(int x){
 }
 */
 
+// Para obtener el menor valor recorre desde el nodo 'head' hasta
+// el último de sus hermanos, comprobando quien tiene el mínimo valor
 int binomialHeap::getMin(){
 
     Nodo *x = head;
@@ -91,8 +93,9 @@ int binomialHeap::getMin(){
 }  
 
 //y->valor <= x->valor
+//Método para unir dos binomial heap del mismo grado, donde
+//el valor del nodo 'y' es menor o igual al valor del nodo 'x'
 void binomialHeap::link(Nodo *x, Nodo *y){
-
 
 	x->parent = y;
 	x->sibling = y->child;
@@ -100,57 +103,14 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 	y->degree = y->degree + 1; // y->degree++;
 }
 
+//Método para unir dos binomialHeap.
 void binomialHeap::unionBinomial(binomialHeap bh){
-/*
-	1 H ← M AKE -B INOMIAL -H EAP ()
-2 head[H ] ← B INOMIAL -HEAP -M ERGE (H1 , H2 )
-3 free the objects H 1 and H 2 but not the lists they point to
-4 if head[H ] = NIL
-5
- then return H
-6 prev-x ← NIL
-7 x ← head[H ]
-8 next-x ← sibling[x]
-9 while next-x = NIL
-10
- do if (degree[x] = degree[next-x]) or
-(sibling[next-x] = NIL and degree[sibling[next-x]] = degree[x])
-11
- then prev-x ← x
- ✄ Cases 1 and 2
-12
- x ← next-x
- ✄ Cases 1 and 2
-13
- else if key[x] ≤ key[next-x]
-14
- then sibling[x] ← sibling[next-x]
- ✄ Case 3
-15
- B INOMIAL -L INK (next-x, x)
- ✄ Case 3
-16
- else if prev-x = NIL
- ✄ Case 4
-17
- then head[H ] ← next-x
- ✄ Case 4
-18
- else sibling[prev-x] ← next-x
- ✄ Case 4
-19
- B INOMIAL -L INK (x, next-x)
- ✄ Case 4
-20
- x ← next-x
- ✄ Case 4
-21
- next-x ← sibling[x]
-22 return H
-*/
 
+    //Se obtienen los 'head' de los binomialHeap
 	Nodo* nodoH1 = head;
 	Nodo* nodoH2 = bh.head;
+
+    //Nodos auxiliares
 	Nodo* aux = nullptr;
 	Nodo* temp = nullptr;
 
