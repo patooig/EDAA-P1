@@ -9,7 +9,7 @@ using namespace std;
 int main(){
 
     clock_t start;
-	double t;
+    double t;
 
     int n;
 
@@ -22,58 +22,81 @@ int main(){
 
     int m = v.size();
 
-    minHeap *mH = new minHeap(m);
+    minHeap *mH1 = new minHeap(m);
+    minHeap *mH2 = new minHeap(m);
 
-    binomialHeap *bH = new binomialHeap();
+    binomialHeap *bH1 = new binomialHeap();
+    binomialHeap *bH2 = new binomialHeap();
 
-    FibonacciHeap *fH = new FibonacciHeap();
+    FibonacciHeap *fH1 = new FibonacciHeap();
+    FibonacciHeap *fH2 = new FibonacciHeap();
 
-    for(int i=0; i<m; i++){
+    int i;
+    int k = m/2;
 
-        mH->insert(v.at(i));
+
+    for(i=0; i<k; i++){
+
+        mH1->insert(v.at(i));
     }
+
+     for(i=k; i<m; i++){
+
+        mH2->insert(v.at(i));
+    }
+
+    start = clock();
+
+    mH1->unirMinHeap(mH2);
+
+    t = (double)(clock()-start)/CLOCKS_PER_SEC;
 
     cout<<"MinHeap:\n";
+    cout<<t<<endl;
+    cout<<"min: "<<mH1->getMin()<<endl;
+    cout<<mH1->size()<<endl;
+
+    for(i=0; i<k; i++){
+
+        bH1->insert(v.at(i));
+    }
+
+     for(i=k; i<m; i++){
+
+        bH2->insert(v.at(i));
+    }
 
     start = clock();
 
-    mH->getMin();
+    bH1->unionBinomial(bH2);
 
-    t= (double)(clock()-start)/CLOCKS_PER_SEC;
-
-    cout<<t<<endl;
-
-
-    for(int i=0; i<m; i++){
-
-        bH->insert(v.at(i));
-    }
+    t = (double)(clock()-start)/CLOCKS_PER_SEC;
 
     cout<<"\nBinomialHeap:\n";
-
-    start = clock();
-
-    bH-> getMin();
-
-    t = (double)(clock()-start)/CLOCKS_PER_SEC;
-
     cout<<t<<endl;
+    cout<<"min: "<<bH1->getMin()<<endl;
+    cout<<bH1->size()<<endl;
 
-    for(int i=0; i<m; i++){
+    for(i=0; i<k; i++){
 
-        fH->insert(v.at(i));
+        fH1->insert(v.at(i));
     }
 
-    cout<<"\nFibonacciHeap:\n";
+     for(i=k; i<m; i++){
+
+        fH2->insert(v.at(i));
+    }
 
     start = clock();
 
-    fH-> getMin();
+    fH1->unir(fH2);
 
     t = (double)(clock()-start)/CLOCKS_PER_SEC;
 
+    cout<<"\nFibonacciHeap:\n";
     cout<<t<<endl;
-
+    cout<<"min: "<<fH1->getMin()<<endl;
+    cout<<fH1->size()<<endl;
 
 /*
     minHeap * mh = new minHeap(10);
