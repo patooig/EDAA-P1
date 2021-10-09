@@ -26,6 +26,7 @@ class binomialHeap{
 private:
 
     Nodo *head;
+    int size;
 
 public:
 
@@ -36,6 +37,7 @@ public:
     void link(Nodo *x, Nodo*y);
     void unionBinomial(binomialHeap bh);
     void imprimir();
+    int size();
 
 };
 
