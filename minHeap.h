@@ -1,18 +1,19 @@
-#include <vector>
+#ifndef MIN_HEAP
+#define MIN_HEAP
 
-using namespace std;
+#include <vector>
 
 class minHeap{
 
     private:
 
-    vector<int>* heap;
+    std::vector<int>* heap;
     int realSize,maxSize;
     void swap(int a,int b);
     void upHeap(int pos);
     int getrealSize();
     void reordenar(int i);
-    vector<int> *getVec();
+    std::vector<int> *getVec();
 
     public: 
     
@@ -23,11 +24,6 @@ class minHeap{
     int getMin();
     int size();
     void imprimir();
-
-    
-    
-
-
-
-    
 };
+
+#endif

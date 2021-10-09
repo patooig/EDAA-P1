@@ -1,5 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef FIBONACCI_HEAP
+#define FIBONACCI_HEAP
 
 struct nodo{
 
@@ -24,3 +24,5 @@ public:
 	int size();
 
 };
+
+#endif
