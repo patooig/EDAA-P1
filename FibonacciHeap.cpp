@@ -66,7 +66,6 @@ int FibonacciHeap::getMin(){
 }
 
 void FibonacciHeap::unir(FibonacciHeap * f){
-
     nodo *auxRight = min->right;
 
     nodo *auxLeft = f->min->left;
@@ -80,6 +79,8 @@ void FibonacciHeap::unir(FibonacciHeap * f){
     auxLeft->right = auxRight;
 
     min = min->valor < f->min->valor?min:f->min;
+
+	sz = sz + f->size();
 }
 
 /*
