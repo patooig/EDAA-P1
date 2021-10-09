@@ -22,7 +22,7 @@ int binomialHeap::size(){
 
   Dos binomial trees no pueden tener el mismo grado */
 void binomialHeap::insert(int x){
-    binomialHeap *bh ;
+    binomialHeap *bh = new binomialHeap();
     Nodo * n_node = new Nodo();
     n_node->valor = x;
     bh->head = n_node;
