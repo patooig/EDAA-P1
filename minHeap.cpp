@@ -32,8 +32,6 @@ void minHeap::upHeap(int pos){     //Hijo verifica su padre, si es menor se inte
             pos = padre;
             padre = padre/2;
         }else break; 
-        
-        
     }
 }
 
