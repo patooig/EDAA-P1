@@ -26,7 +26,7 @@ class binomialHeap{
 private:
 
     Nodo *head;
-    int size;
+    int sz;;
 
 public:
 

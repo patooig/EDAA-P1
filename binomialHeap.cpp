@@ -4,7 +4,7 @@
 binomialHeap::binomialHeap(){
 
     head = nullptr;
-	size = 0;
+	sz = 0;
 
 }
 
@@ -13,7 +13,7 @@ binomialHeap::~binomialHeap(){
 }
 
 binomialHeap::size(){
-	return
+	return sz;
 }
 
 /*Al momento de insertar debemos crear UN BINOMIAL TREE
@@ -26,7 +26,7 @@ void binomialHeap::insert(int x){
     Nodo * n_node = new Nodo();
     n_node->valor = x;
     bh.head = n_node;
-	size++;
+	sz++;
     if(head!=nullptr) unionBinomial(bh);
     else head = n_node;
     // crear binomial tree
