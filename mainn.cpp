@@ -45,6 +45,7 @@ int main(){
     fhh->insert(16);
     fhh->insert(12);
     fhh->insert(11);
+    fhh->insert(0);
     fhh->imprimir();
     cout << endl;
     fh->unir(fhh);
