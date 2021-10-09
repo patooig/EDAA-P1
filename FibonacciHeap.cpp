@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include "FibonacciHeap.h"
 
 using namespace std;
@@ -34,7 +34,6 @@ void FibonacciHeap::imprimir(){
 			aux=aux->right;
 		}
 	}
-
 }
 
 void FibonacciHeap::insert(int n){

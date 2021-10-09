@@ -1,27 +1,10 @@
-#include <bits/stdc++.h>
 #include "binomialHeap.h"
-
-using namespace std;
+#include <climits>
 
 binomialHeap::binomialHeap(){
 
     head = nullptr;
 
-}
-
-void binomialHeap::imprimir(){
-    Nodo * raiz = head ;
-    Nodo * child = raiz->child;
-
-    if(raiz!=nullptr) cout << raiz->valor << endl;
-    //Imprimir los hijos del head
-    while (child!=nullptr)
-    {
-        cout << child->valor << " " ;
-        child = child->sibling;
-    }
-    raiz = raiz->sibling;
-    
 }
 
 binomialHeap::~binomialHeap(){
