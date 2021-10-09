@@ -64,6 +64,25 @@ void FibonacciHeap::insert(int n){
 int FibonacciHeap::getMin(){
 	return min->valor;
 }
+
+void FibonacciHeap::unir(FibonacciHeap * f){
+
+    nodo *auxRight = min->right;
+
+    nodo *auxLeft = f->min->left;
+
+    min->right = f->min;
+
+    f->min->left = min;
+
+    auxRight->left = auxLeft;
+
+    auxLeft->right = auxRight;
+
+    min = min->valor < f->min->valor?min:f->min;
+}
+
+/*
 void FibonacciHeap::unir(FibonacciHeap * f){
 
 	if(f->getMin() <= min->valor ){
@@ -81,7 +100,7 @@ void FibonacciHeap::unir(FibonacciHeap * f){
 		sz+=1;
 
 	}
-}
+}*/
 
 int FibonacciHeap::size(){
 	return sz;
