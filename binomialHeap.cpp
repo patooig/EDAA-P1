@@ -12,7 +12,7 @@ binomialHeap::~binomialHeap(){
     
 }
 
-binomialHeap::size(){
+int binomialHeap::size(){
 	return sz;
 }
 
