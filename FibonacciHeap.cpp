@@ -67,18 +67,19 @@ int FibonacciHeap::getMin(){
 void FibonacciHeap::unir(FibonacciHeap * f){
 
 	if(f->getMin() <= min->valor ){
-		min->left->right = f->min;
-		f->min->left = min->left;
+		min->left->right = f->min->right;
+		f->min->right->left = min->left;
+		min->left=f->min;
 		f->min->right= min;
-		min->left = f->min;
-		min= f->min;
+		min=f->min;
 		sz+=1;
 	}else{
-		min->left->right = f->min;
-		f->min->left = min->left;
+		min->left->right = f->min->right;
+		f->min->right->left = min->left;
+		min->left=f->min;
 		f->min->right= min;
-		min->left = f->min;
 		sz+=1;
+
 	}
 }
 
