@@ -1,5 +1,8 @@
 #include "binomialHeap.h"
 #include <climits>
+#include <iostream>
+
+using namespace std;
 
 binomialHeap::binomialHeap(){
 
@@ -22,14 +25,18 @@ int binomialHeap::size(){
 
   Dos binomial trees no pueden tener el mismo grado */
 void binomialHeap::insert(int x){
+
     binomialHeap *bh = new binomialHeap();
     Nodo * n_node = new Nodo();
     n_node->valor = x;
     bh->head = n_node;
-	sz++;
     if(head!=nullptr) unionBinomial(bh);
     else head = n_node;
+    sz++;
+
     // crear binomial tree
+
+    // cout<<endl<<head->valor<<endl;
 
 }
 
@@ -38,9 +45,11 @@ void binomialHeap::insert(int x){
 int binomialHeap::getMin(){
 
     Nodo *x = head;
-    int min = INT_MAX;
+    int min = x->valor;
 
     while(x != nullptr){
+
+        //cout<<endl<<x->valor<<endl;
 
         if(x->valor < min){
 
@@ -48,8 +57,8 @@ int binomialHeap::getMin(){
         }
 
         x = x->sibling;
-    
     } 
+
     return min;
 }  
 
@@ -61,7 +70,8 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 	x->parent = y;
 	x->sibling = y->child;
 	y->child = x;
-	y->degree = y->degree + 1; // y->degree++;
+	y->degree = y->degree + 1;
+    //cout<<x->valor<<", "<<y->valor<<endl;
 }
 
 //Método para unir dos binomialHeap.
@@ -70,6 +80,8 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
     //Se obtienen los 'head' de los binomialHeap
 	Nodo* nodoH1 = head;
 	Nodo* nodoH2 = bh->head;
+
+   // cout<<nodoH1->valor<<", "<<nodoH2->valor<<endl;
 
     //Nodos auxiliares
 	Nodo* aux = nullptr;
@@ -87,6 +99,8 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 		aux = nodoH2;
 		nodoH2 = nodoH2->sibling;
 	}
+
+//	cout<<endl<<aux->valor<<endl;
 
 	temp = aux;
 
@@ -111,6 +125,7 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 	//Si el nodo existe
 	if(nodoH1 != nullptr){
 
+     //   cout<<"entra h1\n";
 
 		while(nodoH1 != nullptr){
 
@@ -123,6 +138,7 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 	//Si el nodo existe
 	if(nodoH2 != nullptr){
 
+     //   cout<<"entra h2\n";
 		while(nodoH2 != nullptr){
 
 			aux->sibling = nodoH2;
@@ -134,6 +150,8 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 	aux = temp;
 	Nodo* prev = nullptr;
 	Nodo* next = aux->sibling;
+
+  //  cout<<aux->valor<<", "<<next->valor<<endl;
 
 	while(next != nullptr){
 
@@ -155,8 +173,8 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 
 				if(prev == nullptr){
 
-					head = next;
-			}
+					temp = next;
+                }
 
 				else{
 
@@ -172,4 +190,6 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 	}
 
 	head = temp;
+
+    sz = sz + bh->size();
 }

@@ -22,36 +22,84 @@ int main(){
 
     int m = v.size();
 
-    minHeap *mH = new minHeap(m);
+    minHeap *mH1 = new minHeap(m);
+    minHeap *mH2 = new minHeap(m);
 
-    binomialHeap *bH = new binomialHeap();
+    binomialHeap *bH1 = new binomialHeap();
+    binomialHeap *bH2 = new binomialHeap();
+
+    FibonacciHeap *fH1 = new FibonacciHeap();
+    FibonacciHeap *fH2 = new FibonacciHeap();
+
+    int i;
+    int k = m/2;
+
+
+    for(i=0; i<k; i++){
+
+        mH1->insert(v.at(i));
+    }
+
+     for(i=k; i<m; i++){
+
+        mH2->insert(v.at(i));
+    }
 
     start = clock();
-    for(int i=0; i<m; i++){
 
-        mH->insert(v.at(i));
-    }
-    t= (double)(clock()-start)/CLOCKS_PER_SEC;
+    mH1->unirMinHeap(mH2);
+
+    t = (double)(clock()-start)/CLOCKS_PER_SEC;
 
     cout<<"MinHeap:\n";
     cout<<t<<endl;
-    cout<<"min: "<<mH->getMin()<<endl;
-    cout<<mH->size()<<endl;
+    cout<<"min: "<<mH1->getMin()<<endl;
+    cout<<mH1->size()<<endl;
 
+    for(i=0; i<k; i++){
+
+        bH1->insert(v.at(i));
+    }
+
+     for(i=k; i<m; i++){
+
+        bH2->insert(v.at(i));
+    }
 
     start = clock();
-    for(int i=0; i<m; i++){
 
-        bH->insert(v.at(i));
-    }
-    t= (double)(clock()-start)/CLOCKS_PER_SEC;
+    bH1->unionBinomial(bH2);
+
+    t = (double)(clock()-start)/CLOCKS_PER_SEC;
 
     cout<<"\nBinomialHeap:\n";
     cout<<t<<endl;
-    cout<<"min: "<<bH->getMin()<<endl;
-    cout<<bH->size()<<endl;
-/*
-    minHeap * mh = new minHeap(10);
+    cout<<"min: "<<bH1->getMin()<<endl;
+    cout<<bH1->size()<<endl;
+
+    for(i=0; i<k; i++){
+
+        fH1->insert(v.at(i));
+    }
+
+     for(i=k; i<m; i++){
+
+        fH2->insert(v.at(i));
+    }
+
+    start = clock();
+
+    fH1->unir(fH2);
+
+    t = (double)(clock()-start)/CLOCKS_PER_SEC;
+
+    cout<<"\nFibonacciHeap:\n";
+    cout<<t<<endl;
+    cout<<"min: "<<fH1->getMin()<<endl;
+    cout<<fH1->size()<<endl;
+
+    /*
+     minHeap * mh = new minHeap(10);
 
     mh->insert(10);
     mh->insert(5);
