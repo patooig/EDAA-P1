@@ -86,6 +86,7 @@ void binomialHeap::unionBinomial(binomialHeap bh){
 	Nodo* aux = nullptr;
 	Nodo* temp = nullptr;
 
+    //aux corresponde al nodo con menor grado
 	if(nodoH1->degree <= nodoH2->degree){
 
 		aux = nodoH1;
@@ -100,8 +101,10 @@ void binomialHeap::unionBinomial(binomialHeap bh){
 
 	temp = aux;
 
+    //Se recorren los binomial heaps
 	while(nodoH1 != nullptr && nodoH2 != nullptr){
 
+        //Busca el árbol que está al extremo derecho
 		if(nodoH1->degree <= nodoH2->degree){
 
 			aux->sibling = nodoH1;
@@ -116,7 +119,9 @@ void binomialHeap::unionBinomial(binomialHeap bh){
 		aux = aux->sibling;
 	}
 
+	//Si el nodo existe
 	if(nodoH1 != nullptr){
+
 
 		while(nodoH1 != nullptr){
 
@@ -126,6 +131,7 @@ void binomialHeap::unionBinomial(binomialHeap bh){
 		}
 	}
 
+	//Si el nodo existe
 	if(nodoH2 != nullptr){
 
 		while(nodoH2 != nullptr){
