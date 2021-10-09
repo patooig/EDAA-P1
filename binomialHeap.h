@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
-
-using namespace std;
+#ifndef BINOMIAL_HEAP
+#define BINOMIAL_HEAP
 
 //  Basado en la información de:
 //  https://www.cs.toronto.edu/~anikolov/CSC265F16/binomial-heaps.pdf
@@ -39,3 +38,5 @@ public:
     void imprimir();
 
 };
+
+#endif
