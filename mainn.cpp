@@ -37,6 +37,7 @@ int main(){
     cout<<t<<endl;
     cout<<"min: "<<mH->getMin()<<endl;
 
+
     start = clock();
     for(int i=0; i<m; i++){
 
@@ -46,7 +47,7 @@ int main(){
 
     cout<<"\nBinomialHeap:\n";
     cout<<t<<endl;
-    cout<<"min: "<<mH->getMin()<<endl;
+    cout<<"min: "<<bH->getMin()<<endl;
 /*
     minHeap * mh = new minHeap(10);
 
