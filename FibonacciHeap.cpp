@@ -45,16 +45,12 @@ void FibonacciHeap::insert(int n){
 		nuevo->left= nuevo;
 		nuevo->right =nuevo;
 		nuevo->valor = n;
-		//nuevo->parent = NULL;
-		//nuevo->child =NULL;
 		min=nuevo;
 	}else{
 		min-> left -> right = nuevo;
 		nuevo->left= min->left;
 		nuevo -> right =min;
 		nuevo->valor = n;
-		//nuevo ->parent = NULL;
-		//nuevo->child =NULL;
 		min->left = nuevo;
 
         if (nuevo->valor < min->valor)
