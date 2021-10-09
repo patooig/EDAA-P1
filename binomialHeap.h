@@ -35,7 +35,7 @@ public:
     void insert(int x);
     int getMin();
     void link(Nodo *x, Nodo*y);
-    void unionBinomial(binomialHeap bh);
+    void unionBinomial(binomialHeap *bh);
     void imprimir();
     int size();
 

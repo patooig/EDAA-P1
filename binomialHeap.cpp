@@ -22,10 +22,10 @@ int binomialHeap::size(){
 
   Dos binomial trees no pueden tener el mismo grado */
 void binomialHeap::insert(int x){
-    binomialHeap bh ;
+    binomialHeap *bh ;
     Nodo * n_node = new Nodo();
     n_node->valor = x;
-    bh.head = n_node;
+    bh->head = n_node;
 	sz++;
     if(head!=nullptr) unionBinomial(bh);
     else head = n_node;
@@ -65,11 +65,11 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 }
 
 //Método para unir dos binomialHeap.
-void binomialHeap::unionBinomial(binomialHeap bh){
+void binomialHeap::unionBinomial(binomialHeap *bh){
 
     //Se obtienen los 'head' de los binomialHeap
 	Nodo* nodoH1 = head;
-	Nodo* nodoH2 = bh.head;
+	Nodo* nodoH2 = bh->head;
 
     //Nodos auxiliares
 	Nodo* aux = nullptr;

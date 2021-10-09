@@ -36,6 +36,7 @@ int main(){
     cout<<"MinHeap:\n";
     cout<<t<<endl;
     cout<<"min: "<<mH->getMin()<<endl;
+    cout<<mH->size()<<endl;
 
 
     start = clock();
@@ -48,6 +49,7 @@ int main(){
     cout<<"\nBinomialHeap:\n";
     cout<<t<<endl;
     cout<<"min: "<<bH->getMin()<<endl;
+    cout<<bH->size()<<endl;
 /*
     minHeap * mh = new minHeap(10);
 
