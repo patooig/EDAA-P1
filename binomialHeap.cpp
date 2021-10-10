@@ -12,6 +12,8 @@ binomialHeap::binomialHeap(){
 }
 
 binomialHeap::~binomialHeap(){
+
+    delete head;
     
 }
 
@@ -33,11 +35,6 @@ void binomialHeap::insert(int x){
     if(head!=nullptr) unionBinomial(bh);
     else head = n_node;
     sz++;
-
-    // crear binomial tree
-
-    // cout<<endl<<head->valor<<endl;
-
 }
 
 // Para obtener el menor valor recorre desde el nodo 'head' hasta
@@ -48,8 +45,6 @@ int binomialHeap::getMin(){
     int min = x->valor;
 
     while(x != nullptr){
-
-        //cout<<endl<<x->valor<<endl;
 
         if(x->valor < min){
 
@@ -71,7 +66,6 @@ void binomialHeap::link(Nodo *x, Nodo *y){
 	x->sibling = y->child;
 	y->child = x;
 	y->degree = y->degree + 1;
-    //cout<<x->valor<<", "<<y->valor<<endl;
 }
 
 //Método para unir dos binomialHeap.
@@ -81,115 +75,135 @@ void binomialHeap::unionBinomial(binomialHeap *bh){
 	Nodo* nodoH1 = head;
 	Nodo* nodoH2 = bh->head;
 
-   // cout<<nodoH1->valor<<", "<<nodoH2->valor<<endl;
+    //Nodo menor grado
+	Nodo* x = nullptr;
 
-    //Nodos auxiliares
-	Nodo* aux = nullptr;
-	Nodo* temp = nullptr;
+    //Nodo head temporal
+	Nodo* tempHead = nullptr;
 
-    //aux corresponde al nodo con menor grado
+    //Se realiza el MERGE de los binomial Heap, desde el menor grado
+    //hasta el mayor grado
 	if(nodoH1->degree <= nodoH2->degree){
 
-		aux = nodoH1;
+		x = nodoH1;
 		nodoH1 = nodoH1->sibling;
 	}
 
 	else{
 
-		aux = nodoH2;
+		x = nodoH2;
 		nodoH2 = nodoH2->sibling;
 	}
 
-//	cout<<endl<<aux->valor<<endl;
+    //Se guarda el nodo de menor grado
+	tempHead = x;
 
-	temp = aux;
-
-    //Se recorren los binomial heaps
+    //Se recorren las raíces de los binomial trees para
+    //unir desde los de menor grado hasta el de mayor grado
 	while(nodoH1 != nullptr && nodoH2 != nullptr){
 
-        //Busca el árbol que está al extremo derecho
 		if(nodoH1->degree <= nodoH2->degree){
 
-			aux->sibling = nodoH1;
+            //Se une nodoH1 como hermano de "x"
+			x->sibling = nodoH1;
 			nodoH1 = nodoH1->sibling;
 		}
 
 		else{
-			aux->sibling = nodoH2;
+            //Se une nodoH2 como hermano de "x"
+			x->sibling = nodoH2;
 			nodoH2 = nodoH2 -> sibling;
 		}
 
-		aux = aux->sibling;
+		//Se avanza hacia el hermano de "x"
+		x = x->sibling;
 	}
 
-	//Si el nodo existe
+	//Si quedan raíces por unir
 	if(nodoH1 != nullptr){
 
-     //   cout<<"entra h1\n";
-
+        //Se unen las raíces al binomialHeap
 		while(nodoH1 != nullptr){
 
-			aux->sibling = nodoH1;
+			x->sibling = nodoH1;
 			nodoH1 = nodoH1->sibling;
-			aux = aux->sibling;
+			x = x->sibling;
 		}
 	}
 
-	//Si el nodo existe
+	//Si quedan raíces por unir
 	if(nodoH2 != nullptr){
 
-     //   cout<<"entra h2\n";
+        //Se unen las raíces al binomialHeap
 		while(nodoH2 != nullptr){
 
-			aux->sibling = nodoH2;
+			x->sibling = nodoH2;
 			nodoH2 = nodoH2->sibling;
-			aux = aux->sibling;
+			x = x->sibling;
 		}
 	}
 
-	aux = temp;
-	Nodo* prev = nullptr;
-	Nodo* next = aux->sibling;
+	//Se recupera el binomialTree con menor grado
+	x = tempHead;
 
-  //  cout<<aux->valor<<", "<<next->valor<<endl;
+    //prev -> child = x
+    Nodo* prev = nullptr;
 
+    //next = hermano del nodo x
+	Nodo* next = x->sibling;
+
+    //Se recorren todas las ráices
 	while(next != nullptr){
 
-		if(aux->degree != next->degree || (next->sibling != nullptr && next->sibling->degree == aux->degree)){
+        //Si las raíces tienen distinto grado
+        //o next tiene hermano y tiene el mismo grada que x (3 raíces con mismo grado)
+		if(x->degree != next->degree || (next->sibling != nullptr && next->sibling->degree == x->degree)){
 
-			prev = aux;
-			aux = next;
+            prev = x;
+			x = next;
 		}
 
 		else {
 
-			if(aux->valor <= next->valor){
+            //Si el valor de x es menor a la siguiente raiz
+			if(x->valor <= next->valor){
 
-				aux->sibling = next->sibling;
-				link(next, aux);
+                //Hermano de next es ahora hermano de x
+				x->sibling = next->sibling;
+
+                //Se unen los nodos, con x como padre
+				link(next, x);
 			}
 
 			else {
 
+                //Si prev es nulo, ahora next es head temporal
 				if(prev == nullptr){
 
-					temp = next;
+					tempHead = next;
                 }
 
 				else{
 
+                    //Hermano de prev ahora es next
 					prev->sibling = next;
 				}
 
-				link(aux, next);
-				aux = next;
+				//Se unen los nodos con next como padre
+				link(x, next);
+
+                //avanza a la siguiente raíz
+				x = next;
 			}
 		}
 
-		next = aux->sibling;
+		//Se avanza con la siguiente raíz
+		next = x->sibling;
 	}
 
-	head = temp;
+	//Se obtiene head
+	head = tempHead;
 
+    //Se incrementa el tamaño del binomialHeap
     sz = sz + bh->size();
 }
