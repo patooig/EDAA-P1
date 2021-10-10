@@ -1,6 +1,7 @@
 #include "binomialHeap.h"
 #include <climits>
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -12,10 +13,63 @@ binomialHeap::binomialHeap(){
 }
 
 binomialHeap::~binomialHeap(){
+	/*
+	La idea para implementar el destructor es:
+		Guardar en una queue todos las raices de los árboles.
+		Se accede al front y se le pregunta si posee hijos,
+		si es así se va iterando hasta llegar al último hijo.
+		Este último hijo no tendra hermano, asi que se vuelve al padre y se 
+		elimina el hijo, ya eliminado, se guarda el hijo y se va al nodo del
+		hermano, se borra el hijo y ahora el hijo = hermano
+		Ya desde el hijo se itera nuevamente si posee hijos y se repite el paso anterior,
+		Ya una vez habremos llegado al root, hijo deberá ser igual al root, 
+		entonces se compara con el front de la queue, y si coinciden 
+		se almacena en una variable aux, se realiza pop al queue y se elimina aux.
 
-    delete head;
+	*/
+	// POSIBLE DESTRUCTOR BINOMIAL HEAP
+	/*
+	Nodo * raiz = head;
+	queue<Nodo*>raices;
+	while(raiz!=nullptr){ // Almaceno las raices de los arboles
+		raices.push(raiz);
+		raiz = raiz->sibling;
+	}
+	while(1){
+		Nodo * hijo = raices.front()->child;
+		cout <<"Raiz front" << raices.front()->valor<<endl;
+			while(hijo!=nullptr){ // Tiene hijo ?
+				hijo = hijo->child;
+				while(hijo->child==nullptr){  // Ultimo nodo, Tiene hermano?
+					if(hijo->sibling== nullptr){						 // No tiene hermano
+						hijo = hijo->parent;	 // Se sube al nodo padre
+						Nodo * aux = hijo->child;// Y se borra su hijo.
+						hijo->child = nullptr;
+						cout <<"borro"<<endl;
+						delete aux; 
+					}
+					if(hijo->sibling!=nullptr){ // Tiene hermano
+						Nodo * temp = hijo;			// Se guarda el hermano
+						Nodo * aux = hijo->sibling;
+						cout << "Borro hermano anterior"<<endl;
+						delete temp;	// Luego al nodo actual se le dice que no tiene hermano
+						hijo = aux;		// y se avanza al hermano
+					}
+				}
+			}
+		// No tiene hijo
+			Nodo * aux;
+			aux = raices.front();
+			cout << "hago delete"<<endl;
+			raices.pop();
+			delete aux;
+			if(raices.empty() == true) break;
+		}*/
+		
+	}
+	
     
-}
+
 
 int binomialHeap::size(){
 	return sz;
